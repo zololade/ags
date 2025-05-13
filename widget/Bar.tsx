@@ -12,18 +12,37 @@ function SysTray() {
 
   return (
     <box className="SysTray">
-      {bind(tray, "items").as((items) =>
-        items.map((item) => (
-          <menubutton
-            tooltipMarkup={bind(item, "tooltipMarkup")}
-            usePopover={false}
-            actionGroup={bind(item, "actionGroup").as((ag) => ["dbusmenu", ag])}
-            menuModel={bind(item, "menuModel")}
-          >
-            <icon gicon={bind(item, "gicon")} />
-          </menubutton>
-        ))
-      )}
+      {bind(tray, "items").as((items) => {
+        if (items.length <= 6) {
+          return items.map((item) => (
+            <menubutton
+              tooltipMarkup={bind(item, "tooltipMarkup")}
+              usePopover={false}
+              actionGroup={bind(item, "actionGroup").as((ag) => [
+                "dbusmenu",
+                ag,
+              ])}
+              menuModel={bind(item, "menuModel")}
+            >
+              <icon gicon={bind(item, "gicon")} />
+            </menubutton>
+          ));
+        } else {
+          return items.slice(0, 6).map((item) => (
+            <menubutton
+              tooltipMarkup={bind(item, "tooltipMarkup")}
+              usePopover={false}
+              actionGroup={bind(item, "actionGroup").as((ag) => [
+                "dbusmenu",
+                ag,
+              ])}
+              menuModel={bind(item, "menuModel")}
+            >
+              <icon gicon={bind(item, "gicon")} />
+            </menubutton>
+          ));
+        }
+      })}
     </box>
   );
 }
