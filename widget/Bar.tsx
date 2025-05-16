@@ -178,6 +178,11 @@ function FocusedClient() {
         client ? (
           <icon
             className="FocusedIcon"
+            tooltipMarkup={bind(client, "class").as((str) =>
+              str && str.length > 30
+                ? str.slice(0, 30) + "…"
+                : str ?? "Unknown"
+            )}
             size={32}
             /** Bind directly to client.class */
             icon={bind(client, "class").as((cls) => {
