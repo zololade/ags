@@ -169,14 +169,26 @@ function FocusedClient() {
 
   return (
     <box className="Focused" visible={focused.as(Boolean)}>
+      {/*
+        First we bind the focusedClient itself; whenever it changes,
+        we reify a new subtree. Inside that, we bind client.class so
+        we get notified _again_ as soon as the class string is set.
+      */}
       {focused.as((client) =>
         client ? (
-          <label
-            label={bind(client, "class").as((str) =>
-              str && str.length > 20
-                ? str.slice(0, 20) + "…"
-                : str ?? "Unknown"
-            )}
+          <icon
+            className="FocusedIcon"
+            size={32}
+            /** Bind directly to client.class */
+            icon={bind(client, "class").as((cls) => {
+              const theme = Gtk.IconTheme.get_default();
+              // sanitize and lowercase
+              const name = (cls ?? "unknown").toLowerCase();
+              // fallback if the theme doesn’t have it
+              return theme.has_icon(name)
+                ? name
+                : "application-x-executable";
+            })}
           />
         ) : (
           <label label="No Window" />
