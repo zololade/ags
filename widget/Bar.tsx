@@ -89,7 +89,9 @@ function BatteryLevel() {
     <box className="Battery" visible={bind(bat, "isPresent")}>
       <icon icon={bind(bat, "batteryIconName")} />
       <label
-        label={bind(bat, "percentage").as((p) => `${Math.floor(p * 100)} %`)}
+        label={bind(bat, "percentage").as(
+          (p) => `${Math.floor(p * 100)} %`
+        )}
       />
     </box>
   );
@@ -120,7 +122,9 @@ function Media() {
               label={bind(ps[0], "metadata").as(() => {
                 if (ps[0].title || ps[0].artist) {
                   const text = `${ps[0].title} - ${ps[0].artist}`;
-                  return text.length > 20 ? text.slice(0, 20) + "…" : text;
+                  return text.length > 20
+                    ? text.slice(0, 20) + "…"
+                    : text;
                 } else {
                   return "Nothing Playing";
                 }
@@ -169,7 +173,9 @@ function FocusedClient() {
         client ? (
           <label
             label={bind(client, "class").as((str) =>
-              str && str.length > 20 ? str.slice(0, 20) + "…" : str ?? "Unknown"
+              str && str.length > 20
+                ? str.slice(0, 20) + "…"
+                : str ?? "Unknown"
             )}
           />
         ) : (
@@ -187,7 +193,11 @@ function Time({ format = "%H:%M - %a %e" }) {
   );
 
   return (
-    <label className="Time" onDestroy={() => time.drop()} label={time()} />
+    <label
+      className="Time"
+      onDestroy={() => time.drop()}
+      label={time()}
+    />
   );
 }
 
