@@ -18,11 +18,9 @@ function IdleToggle() {
     try {
       await execAsync(["pgrep", "-x", "hypridle"]);
       isIdleInhibited.set(true); // Process found
-      console.log("hypridle is running");
     } catch (e) {
       const eData = e;
       isIdleInhibited.set(false); // Process not found or error
-      console.log("hypridle is not running");
     }
   }
 
