@@ -129,7 +129,7 @@ function BatteryLevel() {
       <icon icon={bind(bat, "batteryIconName")} />
       <label
         label={bind(bat, "percentage").as(
-          (p) => `${Math.floor(p * 100)} %`
+          (p) => `${Math.floor(p * 100)}%`
         )}
       />
     </box>
@@ -242,7 +242,7 @@ function FocusedClient() {
   );
 }
 
-function Time({ format = "%H:%M - %a %e" }) {
+function Time({ format = "%H:%M - %a%e" }) {
   const time = Variable<string>("").poll(
     1000,
     () => GLib.DateTime.new_now_local().format(format)!
